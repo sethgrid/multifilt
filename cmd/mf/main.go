@@ -10,7 +10,7 @@ import (
 )
 
 func init() {
-	AppVersion := "1.0.0"
+	AppVersion := "1.0.1"
 	flag.Usage = func() {
 		fmt.Printf("Usage: %s (multifilter)\n\n", os.Args[0])
 		fmt.Printf("Version %s, Compiled with %s\n\n", AppVersion, runtime.Version())
@@ -29,7 +29,7 @@ func main() {
 	var fileIn, fileOut, fileFilter string
 	var requireFullMatch bool
 	flag.StringVar(&fileIn, "in", "", "file in, default stdin")
-	flag.StringVar(&fileIn, "out", "", "file out, default stdout")
+	flag.StringVar(&fileOut, "out", "", "file out, default stdout")
 	flag.StringVar(&fileFilter, "f", "", "file filter, use -f or provide as single argument")
 	flag.BoolVar(&requireFullMatch, "a", false, "filtered lines must match the whole line in the filter ('a' for match all)")
 	flag.Parse()
@@ -52,9 +52,9 @@ func main() {
 	if fileOut == "" {
 		out = os.Stdout
 	} else {
-		out, err = os.Open(fileOut)
-		if err != nil {
-			fmt.Println(err.Error())
+		out, err = os.OpenFile(fileOut, os.O_CREATE|os.O_WRONLY, 0644)
+		if err != nil && err != os.ErrNotExist {
+			fmt.Println(">", err.Error())
 			os.Exit(1)
 		}
 	}

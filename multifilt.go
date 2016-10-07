@@ -13,7 +13,9 @@ func Filter(src io.Reader, filter io.Reader, output io.Writer, requireFullMatch 
 	sFlt := bufio.NewScanner(filter)
 	var filters [][]byte
 	for sFlt.Scan() {
-		filters = append(filters, sFlt.Bytes())
+		var alloc []byte
+		alloc = append(alloc, sFlt.Bytes()...)
+		filters = append(filters, alloc)
 	}
 
 	for sIn.Scan() {

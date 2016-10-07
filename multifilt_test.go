@@ -12,23 +12,29 @@ func TestFilter(t *testing.T) {
 		requireFull bool
 		expected    []byte
 	}{
+		// {
+		// 	in:          []byte("abc\nbcd\ncde"),
+		// 	filter:      []byte("bc\n"),
+		// 	requireFull: false,
+		// 	expected:    []byte("cde\n"),
+		// },
+		// {
+		// 	in:          []byte("abba\ndabba\ndo\nraz\nI pitty the fool\n"),
+		// 	filter:      []byte("ba\nfoo\n"),
+		// 	requireFull: false,
+		// 	expected:    []byte("do\nraz\n"),
+		// },
+		// {
+		// 	in:          []byte("abba\ndabba\ndo\nraz\nI pitty the fool\n"),
+		// 	filter:      []byte("do\nraz\nabba\nba\n"),
+		// 	requireFull: true,
+		// 	expected:    []byte("dabba\nI pitty the fool\n"),
+		// },
 		{
-			in:          []byte("abc\nbcd\ncde"),
-			filter:      []byte("bc\n"),
-			requireFull: false,
-			expected:    []byte("cde\n"),
-		},
-		{
-			in:          []byte("abba\ndabba\ndo\nraz\nI pitty the fool\n"),
-			filter:      []byte("ba\nfoo\n"),
-			requireFull: false,
-			expected:    []byte("do\nraz\n"),
-		},
-		{
-			in:          []byte("abba\ndabba\ndo\nraz\nI pitty the fool\n"),
-			filter:      []byte("do\nraz\nabba\nba\n"),
+			in:          []byte(largeFilterIn),
+			filter:      []byte(largeFilter),
 			requireFull: true,
-			expected:    []byte("dabba\nI pitty the fool\n"),
+			expected:    []byte(largeFilterExpectedOut),
 		},
 	}
 	for _, test := range cases {
