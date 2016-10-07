@@ -1,11 +1,11 @@
 # MultiFilt
 
-`multifilt` allows you to filter out multiple lines of a file (or any `os.Reader`) based on multiple lines of another file.
+`multifilt` allows you to filter out multiple lines of a file (or any `io.Reader`) based on multiple lines of another file.
 
 ## Example
 `multifilt` allows you to filter on partial line matches or full line matches.
 Here is what would happen with a partial line match.
-The `In` and `Filter` columns represent each an `os.Reader`, and `Out` is an `os.Writer`.
+The `In` and `Filter` columns represent each an `io.Reader`, and `Out` is an `io.Writer`.
 ```
 In:           Filter:   Out:
 The cat       at        with a plan
