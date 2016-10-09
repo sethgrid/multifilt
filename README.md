@@ -30,7 +30,7 @@ Version 1.2.0, Compiled with go1.7.1
 
 Description
 Filter out lines from an input source based on lines in a filter file and/or -v flags.
-A filter file of with two lines, 'ab' and 'bc', will filter out lines from the input source that contain either entry.
+A filter file with two lines, 'ab' and 'bc', will filter out lines from the input source that contain either entry.
 
 Examples
 cat input | mf filter_file -a > output
