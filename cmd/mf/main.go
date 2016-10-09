@@ -12,7 +12,7 @@ import (
 )
 
 func init() {
-	AppVersion := "1.2.2"
+	AppVersion := "1.2.3"
 	flag.Usage = func() {
 		fmt.Printf("Usage: %s (multifilter) [options] [argument]\n\n", os.Args[0])
 		fmt.Printf("Version %s, Compiled with %s\n\n", AppVersion, runtime.Version())
