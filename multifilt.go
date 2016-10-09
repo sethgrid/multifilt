@@ -28,15 +28,17 @@ func Filter(src io.Reader, filter io.Reader, output io.Writer, requireFullMatch 
 			}
 		}
 
-		if !lineShouldFilter {
-			_, err = output.Write(sIn.Bytes())
-			if err != nil {
-				return err
-			}
-			_, err = output.Write([]byte("\n"))
-			if err != nil {
-				return err
-			}
+		if lineShouldFilter {
+			continue
+		}
+
+		_, err = output.Write(sIn.Bytes())
+		if err != nil {
+			return err
+		}
+		_, err = output.Write([]byte("\n"))
+		if err != nil {
+			return err
 		}
 	}
 	return nil
