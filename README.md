@@ -2,6 +2,8 @@
 
 `multifilt` allows you to filter out multiple lines of a file (or any `io.Reader`) based on multiple lines of another file.
 
+[UPDATE]: Looks like this is just a poor substitute for `grep -v --file=filename input`. See below for benchmarks. TL;DR: they are not favorable to `mf` ;)
+
 ## Example
 `multifilt` allows you to filter on partial line matches or full line matches.
 Here is what would happen with a partial line match.
@@ -46,4 +48,19 @@ mf -in input -out ouput -f filter_file
     	file out, default stdout
   -v value
     	specify multiple -v params to filter on each
+```
+
+# Wait, isn't this just `grep -v --file=filter input`?
+
+_Somebody_ should read man pages before making tools :).
+Looks like `mf` is comparible to `grep` with small filter files, but with larger (like 100k lines), `mf` is a vastly poorer choice of tool.
+
+```
+$ go test -bench=.
+Benchmark_mf_100kline_filter-8     	       1	7309102761 ns/op
+Benchmark_grep_100kline_filter-8   	      10	 174788101 ns/op
+Benchmark_mf_2line_filter-8        	     300	   4984793 ns/op
+Benchmark_grep_2line_filter-8      	     300	   4017399 ns/op
+PASS
+ok  	github.com/sethgrid/multifilt/cmd/mf	19.972s
 ```
