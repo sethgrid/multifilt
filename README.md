@@ -24,7 +24,7 @@ The `mf` commandline tool can be installed with:
 
 ```
 $ mf -h
-Usage: mf (multifilter)
+Usage: mf (multifilter) [options] [argument]
 
 Version 1.2.0, Compiled with go1.7.1
 
@@ -33,7 +33,7 @@ Filter out lines from an input source based on lines in a filter file and/or -v 
 A filter file with two lines, 'ab' and 'bc', will filter out lines from the input source that contain either entry.
 
 Examples
-cat input | mf filter_file -a > output
+cat input | mf -a filter_file > output
 cat input | mf -v foo -v bar -v raz filter_file > output
 mf -in input -out ouput -f filter_file
 
