@@ -43,15 +43,8 @@ func Filter(src io.Reader, filter io.Reader, output io.Writer, requireFullMatch 
 }
 
 func isMatch(a []byte, b []byte, requireFullMatch bool) bool {
-	var match bool
-	if !requireFullMatch {
-		if bytes.Contains(a, b) {
-			match = true
-		}
-	} else {
-		if bytes.Compare(a, b) == 0 {
-			match = true
-		}
+	if !requireFullMatch && bytes.Contains(a, b) {
+		return true
 	}
-	return match
+	return bytes.Compare(a, b) == 0
 }
