@@ -12,15 +12,15 @@ import (
 )
 
 func init() {
-	AppVersion := "1.2.0"
+	AppVersion := "1.2.1"
 	flag.Usage = func() {
-		fmt.Printf("Usage: %s (multifilter)\n\n", os.Args[0])
+		fmt.Printf("Usage: %s (multifilter) [options] [argument]\n\n", os.Args[0])
 		fmt.Printf("Version %s, Compiled with %s\n\n", AppVersion, runtime.Version())
 		fmt.Printf("Description\n")
 		fmt.Printf("Filter out lines from an input source based on lines in a filter file and/or -v flags.\n")
-		fmt.Printf("A filter file of with two lines, 'ab' and 'bc', will filter out lines from the input source that contain either entry.\n\n")
+		fmt.Printf("A filter file with two lines, 'ab' and 'bc', will filter out lines from the input source that contain either entry.\n\n")
 		fmt.Printf("Examples\n")
-		fmt.Printf("cat input | %s filter_file -a > output \n", os.Args[0])
+		fmt.Printf("cat input | %s -a filter_file > output \n", os.Args[0])
 		fmt.Printf("cat input | %s -v foo -v bar -v raz filter_file > output \n", os.Args[0])
 		fmt.Printf("%s -in input -out ouput -f filter_file \n", os.Args[0])
 		fmt.Printf("\n")

@@ -26,7 +26,7 @@ The `mf` commandline tool can be installed with:
 $ mf -h
 Usage: mf (multifilter) [options] [argument]
 
-Version 1.2.0, Compiled with go1.7.1
+Version 1.2.1, Compiled with go1.7.1
 
 Description
 Filter out lines from an input source based on lines in a filter file and/or -v flags.
