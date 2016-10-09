@@ -22,12 +22,28 @@ The `mf` commandline tool can be installed with:
 
 ## usage
 
-Given the files the above example (`In` and `Filter`)
 ```
-$ $ cat In | mf Filter | diff Out - # Out is the file provided in the cmd/mf dir
-$ echo $? # 0; meaning that Out is as expected
-$ # typical usages
-$ cat In | mf Filter > Out
-$ # or
-$ mf -in In -f Filter -out Out
+$ mf -h
+Usage: mf (multifilter)
+
+Version 1.2.0, Compiled with go1.7.1
+
+Description
+Filter out lines from an input source based on lines in a filter file and/or -v flags.
+A filter file of with two lines, 'ab' and 'bc', will filter out lines from the input source that contain either entry.
+
+Examples
+cat input | mf filter_file -a > output
+cat input | mf -v foo -v bar -v raz filter_file > output
+mf -in input -out ouput -f filter_file
+
+  -a	filtered lines must match the whole line in the filter ('a' for match all)
+  -f string
+    	file filter, use -f or provide as single argument
+  -in string
+    	file in, default stdin
+  -out string
+    	file out, default stdout
+  -v value
+    	specify multiple -v params to filter on each
 ```
