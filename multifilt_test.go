@@ -77,10 +77,7 @@ func TestIsMatch(t *testing.T) {
 	}
 
 	for _, test := range cases {
-		matched, err := isMatch(test.haystack, test.needle, test.requireFull)
-		if err != nil {
-			t.Errorf("got error: %v", err)
-		}
+		matched := isMatch(test.haystack, test.needle, test.requireFull)
 		if matched != test.shouldMatch {
 			t.Errorf("%s <=> %s, got match? %t, want match? %t", test.haystack, test.needle, matched, test.shouldMatch)
 		}

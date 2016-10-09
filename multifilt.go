@@ -23,11 +23,7 @@ func Filter(src io.Reader, filter io.Reader, output io.Writer, requireFullMatch 
 		// use anonymous function to wrap have closure around lineShouldFilter
 		err = func() error {
 			for _, b := range filters {
-				matched, err := isMatch(sIn.Bytes(), b, requireFullMatch)
-				if err != nil {
-					return err
-				}
-				if matched {
+				if isMatch(sIn.Bytes(), b, requireFullMatch) {
 					lineShouldFilter = true
 					return nil
 				}
@@ -52,7 +48,7 @@ func Filter(src io.Reader, filter io.Reader, output io.Writer, requireFullMatch 
 	return nil
 }
 
-func isMatch(a []byte, b []byte, requireFullMatch bool) (bool, error) {
+func isMatch(a []byte, b []byte, requireFullMatch bool) bool {
 	var match bool
 	if !requireFullMatch {
 		if bytes.Contains(a, b) {
@@ -63,5 +59,5 @@ func isMatch(a []byte, b []byte, requireFullMatch bool) (bool, error) {
 			match = true
 		}
 	}
-	return match, nil
+	return match
 }
