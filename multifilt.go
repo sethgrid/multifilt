@@ -20,15 +20,13 @@ func Filter(src io.Reader, filter io.Reader, output io.Writer, requireFullMatch 
 
 	for sIn.Scan() {
 		var lineShouldFilter bool
-		// use anonymous function to have a closure around lineShouldFilter
-		func() {
-			for _, b := range filters {
-				if isMatch(sIn.Bytes(), b, requireFullMatch) {
-					lineShouldFilter = true
-					return
-				}
+
+		for _, b := range filters {
+			if isMatch(sIn.Bytes(), b, requireFullMatch) {
+				lineShouldFilter = true
+				break
 			}
-		}()
+		}
 
 		if !lineShouldFilter {
 			_, err = output.Write(sIn.Bytes())
